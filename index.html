@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===================================================================
+       HEAD: information for browsers and search engines (not visible on the page).
+       EDIT: the <title> and the description below show up in Google results
+       and when you share your link on WhatsApp, Telegram, etc.
+       =================================================================== -->
+  <title>Abenzer Ashenafi</title>
+  <meta name="description" content="Video editor specialising in YouTube content, short-form video. See my work and get in touch." />
+  <meta name="theme-color" content="#0b0b0c" />
+  <meta property="og:title" content="Your Name — Video Editor" />
+  <meta property="og:description" content="Video editor specialising in YouTube content, short-form video and brand films." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <!-- Runs immediately: adds the "js" class (so scroll animations only hide things
+       when JavaScript works) and restores the visitor's saved light/dark choice. -->
+  <script>
+    (function () {
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("theme");
+        if (t) document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Google Fonts: Space Grotesk (headings), Inter (body text), JetBrains Mono (timecodes/labels) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- All the styling lives in this one file -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <!-- Small icon library (play, arrow, sun, moon). Used below with <use href="#i-play" /> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  </svg>
+
+  <!-- ===================================================================
+       TWIST #1: a video-editing "timeline" along the top of the page.
+       The orange bar and playhead move as you scroll (see js/main.js → updateOnScroll).
+       =================================================================== -->
+  <div class="timeline" aria-hidden="true">
+    <div class="timeline__fill" id="timelineFill"></div>
+    <div class="timeline__head" id="timelineHead"></div>
+  </div>
+
+  <!-- Floating timecode in the bottom-left corner, like the counter in an editing app -->
+  <div class="hud" aria-hidden="true">
+    <span class="hud__rec"></span>
+    <span id="hudTc">00:00:00:00</span>
+    <span class="hud__scene" id="hudScene">Scene 01 · Intro</span>
+  </div>
+
+  <!-- Custom cursor (desktop only). It turns into a "PLAY" bubble over videos. -->
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__label">PLAY</span></div>
+
+  <!-- ===================================================================
+       NAVIGATION BAR
+       Links use #work, #about… which jump to the section with that id.
+       data-config="name" means: "fill this text from js/config.js"
+       =================================================================== -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#home" class="nav__logo" aria-label="Back to top">
+        <span class="nav__mark" data-config="initials"></span>
+        <span class="nav__name" data-config="name">Abenezer Ashenafi</span>
+      </a>
+
+      <nav class="nav__menu" id="menu" aria-label="Main navigation">
+        <ul class="nav__links">
+          <li><a href="#work">Work</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch between light and dark theme">
+          <svg class="icon-sun"><use href="#i-sun" /></svg>
+          <svg class="icon-moon"><use href="#i-moon" /></svg>
+        </button>
+        <a href="#contact" class="btn btn--primary btn--small nav__cta">Hire me</a>
+        <button class="nav__burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================================================================
+         1. HERO (first screen)
+         EDIT: the headline and intro text are plain text — change them freely.
+         Each <span class="line"> is one line of the headline; they slide up one by one.
+         ================================================================ -->
+    <section class="hero" id="home" data-scene="Intro">
+      <div class="container">
+        <ul class="hero__meta">
+          <li class="hero__status"><span class="pulse"></span> <span data-config="availability">Available for new projects</span></li>
+          <li><span data-config="role">Video Editor</span></li>
+          <li data-config="location">Adiss ababa, Ethiopia</li>
+        </ul>
+
+        <h1 class="hero__title" aria-label="I turn raw footage into stories people finish watching.">
+          <span class="line" aria-hidden="true"><span style="--i:0">I turn raw footage</span></span>
+          <span class="line" aria-hidden="true"><span style="--i:1">into stories people</span></span>
+          <span class="line" aria-hidden="true"><span style="--i:2" class="accent">finish watching.</span></span>
+        </h1>
+
+        <div class="hero__row">
+          <p class="hero__intro reveal">
+            Hi, I’m <strong data-config="name">Abenezer Ashenafi</strong> — a video editor focused on
+            YouTube videos, short-form content and brand films. Sharp pacing, clean sound and
+            honest colour, so your story holds attention from the very first frame.
+          </p>
+          <div class="hero__cta reveal" style="--delay:.1s">
+            <a href="#work" class="btn btn--primary">See my work <svg><use href="#i-arrow" /></svg></a>
+            <a href="#contact" class="btn btn--ghost">Let’s talk</a>
+          </div>
+        </div>
+
+        <!-- SHOWREEL: the big video. Its YouTube link is set in js/config.js → showreel -->
+        <button class="media frame showreel" id="showreel" type="button" data-cursor="play" aria-label="Play showreel">
+          <img class="thumb" alt="" />
+          <span class="media__ph">
+            <strong>Showreel placeholder</strong>
+            <span>Add your file in <code>assets/videos/</code></span>
+          </span>
+          <span class="media__tag"><i class="rec-dot"></i> Showreel</span>
+          <span class="media__play"><svg><use href="#i-play" /></svg></span>
+        </button>
+      </div>
+
+      <!-- Scrolling strip of software names. Filled from js/config.js → tools -->
+      <div class="marquee" aria-hidden="true"><div class="marquee__track" id="marqueeTrack"></div></div>
+    </section>
+
+    <!-- ================================================================
+         2. WORK (video grid). The cards are created automatically from
+         the list in js/config.js → videos. You do NOT edit cards here.
+         ================================================================ -->
+    <section class="section" id="work" data-scene="Work">
+      <div class="container">
+        <p class="eyebrow reveal"><span class="eyebrow__no">01</span> Selected work</p>
+        <div class="section__head">
+          <h2 class="section__title reveal">Recent <span class="accent">cuts</span></h2>
+          <div class="filters reveal" id="filters" role="group" aria-label="Filter videos by category"></div>
+        </div>
+        <div class="grid" id="videoGrid"></div>
+        <p class="grid__note reveal">Click any card to watch the video right here.</p>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         3. ABOUT
+         EDIT: the paragraphs below. The photo is assets/images/profile-placeholder.svg —
+         replace that file (or change the src) with your own photo.
+         The numbers come from js/config.js → stats.
+         ================================================================ -->
+    <section class="section" id="about" data-scene="About">
+      <div class="container about">
+        <div class="portrait frame reveal">
+          <img src="assets/images/h.jpg" alt="Portrait of the video editor" width="800" height="1000" loading="lazy" />
+        </div>
+
+        <div class="about__text">
+          <p class="eyebrow reveal"><span class="eyebrow__no">02</span> About me</p>
+          <h2 class="section__title reveal">Editing is where the story is <span class="accent">actually made.</span></h2>
+          <p class="lead reveal">
+            I’m a video editor who loves the invisible details: the cut that lands on the beat,
+            the sound that makes a scene feel real, the colour that sets the mood.
+          </p>
+          <p class="reveal">
+            I’m a creative video editor passionate about transforming ideas into engaging visual stories.
+             I specialize in crafting compelling videos with smooth transitions, dynamic effects, and attention to detail,
+              helping brands and creators connect with their audiences through impactful content.
+          </p>
+
+          <div class="stats reveal" id="stats"></div>
+
+          <p class="mini-title reveal">Tools I work with</p>
+          <ul class="chips reveal" id="toolChips"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         4. SERVICES
+         EDIT: change the text, or copy one whole <li class="service"> block to add a service.
+         ================================================================ -->
+    <section class="section" id="services" data-scene="Services">
+      <div class="container">
+        <p class="eyebrow reveal"><span class="eyebrow__no">03</span> What I do</p>
+        <h2 class="section__title reveal">Services built around <span class="accent">your video</span></h2>
+
+        <ul class="services">
+          <li class="service reveal">
+            <span class="service__no">01</span>
+            <h3 class="service__title">YouTube editing</h3>
+            <p class="service__text">Long-form videos with tight pacing, retention-focused storytelling, captions, music and sound design.</p>
+            <span class="service__tags">Cuts · Sound · Captions</span>
+          </li>
+          <li class="service reveal">
+            <span class="service__no">02</span>
+            <h3 class="service__title">Short-form video</h3>
+            <p class="service__text">Vertical edits for Reels, TikTok and YouTube Shorts — fast hooks, dynamic text and clean exports.</p>
+            <span class="service__tags">Reels · TikTok · Shorts</span>
+          </li>
+          <li class="service reveal">
+            <span class="service__no">03</span>
+            <h3 class="service__title">Commercials &amp; promos</h3>
+            <p class="service__text">Product videos, brand stories and event recaps edited to look polished and on-brand.</p>
+            <span class="service__tags">Brand · Promo · Events</span>
+          </li>
+          <li class="service reveal">
+            <span class="service__no">04</span>
+            <h3 class="service__title">Colour &amp; motion graphics</h3>
+            <p class="service__text">Colour correction and grading, titles, lower thirds and simple animation that elevate the footage.</p>
+            <span class="service__tags">Grade · Titles · Motion</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         5. PROCESS (a line "draws" itself as you scroll past it)
+         ================================================================ -->
+    <section class="section" id="process" data-scene="Process">
+      <div class="container">
+        <p class="eyebrow reveal"><span class="eyebrow__no">04</span> How we’ll work</p>
+        <h2 class="section__title reveal">From raw footage to <span class="accent">final export</span></h2>
+
+        <ol class="process" id="processList">
+          <li class="step reveal">
+            <span class="step__dot"></span>
+            <span class="step__no">Step 01</span>
+            <h3>Brief</h3>
+            <p>You share the footage and your goals. We agree on style, length and deadline.</p>
+          </li>
+          <li class="step reveal" style="--delay:.08s">
+            <span class="step__dot"></span>
+            <span class="step__no">Step 02</span>
+            <h3>Rough cut</h3>
+            <p>I assemble the story, find the rhythm and send a first version for your feedback.</p>
+          </li>
+          <li class="step reveal" style="--delay:.16s">
+            <span class="step__dot"></span>
+            <span class="step__no">Step 03</span>
+            <h3>Polish</h3>
+            <p>Sound, colour, graphics and your revisions — until it feels exactly right.</p>
+          </li>
+          <li class="step reveal" style="--delay:.24s">
+            <span class="step__dot"></span>
+            <span class="step__no">Step 04</span>
+            <h3>Deliver</h3>
+            <p>Final files deliver for you on time,  alternate cuts if needed.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         6. CONTACT
+         The email and social links come from js/config.js.
+         The form is front-end only: it opens the visitor's email app with the message filled in.
+         ================================================================ -->
+    <section class="section section--contact" id="contact" data-scene="Contact">
+      <div class="container">
+        <p class="eyebrow reveal"><span class="eyebrow__no">05</span> Contact</p>
+        <h2 class="contact__title reveal">Let’s make something <span class="accent">worth watching.</span></h2>
+
+        <div class="contact">
+          <div class="contact__info">
+            <p class="mini-title reveal">Email</p>
+            <div class="contact__email reveal">
+              <a href="#" data-email data-email-text class="contact__mail">hello@yourname.com</a>
+              <button class="copy" id="copyEmail" type="button">Copy</button>
+            </div>
+
+            <p class="mini-title reveal">Elsewhere</p>
+            <ul class="socials reveal">
+              <li><a data-social="youtube" href="#">YouTube <svg><use href="#i-arrow" /></svg></a></li>
+              <li><a data-social="instagram" href="#">Instagram <svg><use href="#i-arrow" /></svg></a></li>
+              <li><a data-social="tiktok" href="#">TikTok <svg><use href="#i-arrow" /></svg></a></li>
+              <!-- <li><a data-social="linkedin" href="#">LinkedIn <svg><use href="#i-arrow" /></svg></a></li> -->
+              <li><a data-social="x" href="#">X / Twitter <svg><use href="#i-arrow" /></svg></a></li>
+            </ul>
+          </div>
+
+          <form class="form reveal" id="contactForm" novalidate>
+            <div class="field">
+              <label for="f-name">name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" placeholder="your name" required />
+            </div>
+            <div class="field">
+              <label for="f-email">gmail</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" placeholder="something@gmail.com" required />
+            </div>
+            <div class="field">
+              <label for="f-type">Project type</label>
+              <select id="f-type" name="type">
+                <option>YouTube video</option>
+                <option>Short-form / Reels</option>
+                <!-- <option>Commercial / Promo</option> -->
+                <option>Something else</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-msg">Tell me about your project</label>
+              <textarea id="f-msg" name="message" rows="4" placeholder="Length, style, deadline, links to footage…" required></textarea>
+            </div>
+            <button class="btn btn--primary" type="submit">Send message <svg><use href="#i-arrow" /></svg></button>
+            <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span data-year>2026</span> <span data-config="Abenezer Ashenafi">/span>. All rights reserved.</p>
+      <a href="#home" class="footer__top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- ===================================================================
+       VIDEO POP-UP: when someone clicks a video, JavaScript puts a YouTube
+       player in here and shows it. Closing it removes the player again.
+       =================================================================== -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal__bar">
+        <p class="modal__title" id="modalTitle">Video</p>
+        <div class="modal__actions">
+          <a class="modal__yt" id="modalLink" href="#" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
+          <button class="modal__close" id="modalClose" type="button" aria-label="Close video">Close ✕</button>
+        </div>
+      </div>
+      <div class="modal__frame" id="modalFrame"></div>
+    </div>
+  </div>
+
+  <!-- Small message that appears at the bottom of the screen -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Order matters: config.js first (your content), then main.js (the behaviour). -->
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
