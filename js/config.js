@@ -32,7 +32,8 @@ const SITE = {
      2. Write its path here, e.g.  "assets/videos/showreel.mp4"
      (Optional) showreelPoster = a picture shown before playing, e.g.
         "assets/images/showreel.jpg". If left empty, the first frame is used. */
-  showreel: "assets/videos/finalll.mp4",
+  //showreel: "assets/videos/finalll.mp4",
+  showreel: "https://res.cloudinary.com/yjion4xk/video/upload/v1794318242/videos/finalll.mp4",
   showreelPoster: "",
 
   /* ---------- NUMBERS in the About section ----------
@@ -81,7 +82,8 @@ const SITE = {
     {
       // title: "Documentary-style edit",
       // category: "Documentary",
-       video: "assets/videos/my ethio.mp4",
+       //video: "assets/videos/my ethio.mp4",
+       video: "https://res.cloudinary.com/yjion4xk/video/upload/v1794318239/videos/my_ethio.mp4",
       // poster: "",
       // description: "Story-driven edit with interviews, B-roll and sound design.",
       // length: "1:20",
@@ -89,7 +91,8 @@ const SITE = {
     {
       // title: "Product launch promo",
       // category: "Commercial",
-       video: "assets/videos/Realestate.mp4",
+      // video: "assets/videos/Realestate.mp4",
+      video: "https://res.cloudinary.com/yjion4xk/video/upload/v1794318253/videos/Realestate.mp4",
       // poster: "",
       // description: "A launch video with kinetic titles and punchy cuts.",
       // length: "1:00",
@@ -97,7 +100,8 @@ const SITE = {
     {
       // title: "Vertical short with a strong hook",
       // category: "Shorts",
-       video: "assets/videos/promo.mp4",
+       //video: "assets/videos/promo.mp4",
+        video: "https://res.cloudinary.com/yjion4xk/video/upload/v1794318182/videos/promo.mp4",
       // poster: "",
       // description: "Fast-paced vertical edit with captions made for retention.",
       // length: "0:45",
@@ -105,7 +109,8 @@ const SITE = {
     {
       // title: "Cinematic travel film",
       // category: "Cinematic",
-       video: "assets/videos/motio.mp4",
+       //video: "assets/videos/motio.mp4",
+       video: "https://res.cloudinary.com/yjion4xk/video/upload/v1794318269/videos/motio.mp4",
       // poster: "",
       // description: "Colour-graded travel story set to a custom-timed soundtrack.",
       // length: "1:15",
@@ -113,7 +118,8 @@ const SITE = {
     {
       // title: "Podcast highlight reel",
       // category: "Documentary",
-       video: "assets/videos/mhreth.mp4",
+      // video: "assets/videos/mhreth.mp4",
+        video: "https://res.cloudinary.com/yjion4xk/video/upload/v1794319824/mhreth.mp4",
       // poster: "",
       // description: "The best moments of a long conversation, cut for social.",
       // length: "0:50",
@@ -121,7 +127,8 @@ const SITE = {
     {
       // title: "Brand story ad",
       // category: "Commercial",
-       video: "assets/videos/my.mp4",
+       //video: "assets/videos/my.mp4",
+       video: "https://res.cloudinary.com/yjion4xk/video/upload/v1794318246/videos/my.mp4",
       // poster: "",
       // description: "Emotional brand film mixing live action and motion graphics.",
       // length: "1:30",
