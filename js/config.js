@@ -32,13 +32,10 @@ const SITE = {
      2. Write its path here, e.g.  "assets/videos/showreel.mp4"
      (Optional) showreelPoster = a picture shown before playing, e.g.
         "assets/images/showreel.jpg". If left empty, the first frame is used. */
-<<<<<<< HEAD
-  //showreel: "assets/videos/finalll.mp4",
-  showreel: "https://res.cloudinary.com/yjion4xk/video/upload/v1794318242/videos/finalll.mp4",
-=======
-  showreel: "assets/videos/finalll.mp4",
->>>>>>> 9d560711a391fc7e8405de2d8f95729851fca9a4
-  showreelPoster: "",
+
+showreel: "https://res.cloudinary.com/yjion4xk/video/upload/v1794318242/videos/finalll.mp4",
+showreelPoster: "",
+
 
   /* ---------- NUMBERS in the About section ----------
      value = the number that counts up, suffix = what comes after it (+, %, k…) */
