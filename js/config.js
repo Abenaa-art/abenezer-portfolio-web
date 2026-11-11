@@ -129,8 +129,7 @@ videos: [
     // description: "Emotional brand film mixing live action and motion graphics.",
     // length: "1:30",
   },
-],
-
-    },
+  ],
+};
   
 
