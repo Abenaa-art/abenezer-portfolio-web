@@ -33,7 +33,7 @@ const SITE = {
      (Optional) showreelPoster = a picture shown before playing, e.g.
         "assets/images/showreel.jpg". If left empty, the first frame is used. */
 
-showreel: "https://res.cloudinary.com/yjion4xk/video/upload/v1794559745/final_my_port.mp4",
+showreel: "https://res.cloudinary.com/yjion4xk/video/upload/v1794560413/Sequence_01.mp4",
 showreelPoster: "",
 
 
